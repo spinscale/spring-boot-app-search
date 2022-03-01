@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base}">
+<body>
+
+<div layout:fragment="content">
+
+    <h1>Search</h1>
+
+    <div>
+        <form action="/search" method="get">
+            <input type="search"
+                   autocomplete="off"
+                   id="searchbox"
+                   name="q" placeholder="Begin Typing To Search Articles..."
+                   hx-post="/htmx-search"
+                   hx-trigger="keyup changed delay:500ms, search"
+                   hx-target="#search-results"
+                   hx-indicator=".htmx-indicator"
+                   style="width:20em">
+
+            <span class="htmx-indicator" style="padding-left: 1em;color:red">Searching... </span>
+        </form>
+    </div>
+
+    <div id="search-results">
+    </div>
+</div>
+
+</body>
+</html>

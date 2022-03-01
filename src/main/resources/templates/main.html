@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/base}">
+<body>
+
+<div layout:fragment="content">
+
+    <h1>Search</h1>
+
+    <div>
+        <form action="/" method="get">
+            <input autocomplete="off" placeholder="Enter search terms..." type="text" name="q" th:value="${q}" style="width:20em" >
+            <input type="submit" value="Search" />
+        </form>
+    </div>
+
+    <div th:if="${results != null && !results.empty}">
+
+        <div th:each="result : ${results}">
+            <h4><a th:href="${result.url}" th:text="${result.title}"></a></h4>
+            <blockquote style="font-size: 0.7em" th:text="${result.description}"></blockquote>
+            <hr>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

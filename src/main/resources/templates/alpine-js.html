@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/base}">
+<body>
+
+<div layout:fragment="content" x-data="{ q: '', results: [] }">
+
+    <h1>Search</h1>
+
+    <div>
+        <form @submit.prevent="">
+            <input type="search" autocomplete="off" placeholder="Begin Typing To Search Articles..." style="width:20em"
+                   x-model="q"
+                   @keyup="client.search(q).then(resultList => results = resultList.results)">
+        </form>
+    </div>
+
+    <template x-for="result in results">
+        <template x-if="result.data != null && result.data.title != null && result.data.url != null && result.data.meta_description != null ">
+            <div>
+                <h4><a :href="result.data.url.raw" x-text="result.data.title.raw"></a></h4>
+                <blockquote style="font-size: 0.7em" x-text="result.data.meta_description.raw"></blockquote>
+                <hr>
+            </div>
+        </template>
+    </template>
+
+<script th:inline="javascript">
+var client = window.ElasticAppSearch.createClient({
+  searchKey: [[${@environment.getProperty('appsearch.key')}]],
+  endpointBase: [[${@environment.getProperty('appsearch.url')}]],
+  engineName: [[${@environment.getProperty('appsearch.engine')}]]
+});
+</script>
+
+</div>
+
+</body>
+</html>

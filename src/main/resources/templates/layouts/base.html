@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Search Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/sakura.css" type="text/css">
+    <script src="https://unpkg.com/htmx.org@1.7.0"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@elastic/app-search-javascript@8.0.0/dist/elastic_app_search.umd.js"></script>
+
+</head>
+
+<body>
+
+<nav>
+    <a href="/" style="border-right: 1px solid; padding-right: 1em">Server side search</a>
+    <a href="/htmx" style="border-right: 1px solid; padding-right: 1em; padding-left: 1em;">htmx based search</a>
+    <a href="/alpine" style="padding-right: 1em; padding-left: 1em;">Alpine based search</a>
+</nav>
+
+<div layout:fragment="content">
+
+</div>
+
+</body>
+</html>
