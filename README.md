@@ -8,7 +8,13 @@ This is a demo of Spring Boot in combination with Elastic App Search.
 
 Using the [Terraform Elastic Cloud
 Provider](https://registry.terraform.io/providers/elastic/ec/latest/docs)
-you can spin up a full environment by running `terraform apply`.
+you can spin up a full environment by running:
+
+```bash
+terraform validate
+terraform init
+terraform apply
+```
 
 The above link to the cloud provider also shows the steps required to
 generate an API key in Elastic Cloud.
