@@ -184,6 +184,10 @@ The rendering of the results is done using the `template` HTML tag
 </template>
 ```
 
+As [Search UI](https://github.com/elastic/search-ui) is react only, there is
+also a community project, that uses Lit elements, see
+https://github.com/codebunt/elastic-searchui-webcomponents
+
 ## Running tests
 
 I have added a single test, that assumes that the crawling has taken place
