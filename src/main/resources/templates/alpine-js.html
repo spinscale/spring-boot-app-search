@@ -4,7 +4,7 @@
         layout:decorate="~{layouts/base}">
 <body>
 
-<div layout:fragment="content" x-data="{ q: '', results: [] }">
+<div layout:fragment="content" x-data="{ q: '', response: null }">
 
     <h1>Search</h1>
 
@@ -12,18 +12,20 @@
         <form @submit.prevent="">
             <input type="search" autocomplete="off" placeholder="Begin Typing To Search Articles..." style="width:20em"
                    x-model="q"
-                   @keyup="client.search(q).then(resultList => results = resultList.results)">
+                   @keyup="client.search(q).then(resultList => response = resultList)">
         </form>
     </div>
 
-    <template x-for="result in results">
+    <template x-if="response != null && response.info.meta != null && response.info.meta.request_id != null">
+    <template x-for="result in response.results">
         <template x-if="result.data != null && result.data.title != null && result.data.url != null && result.data.meta_description != null ">
             <div>
-                <h4><a :href="result.data.url.raw" x-text="result.data.title.raw"></a></h4>
+                <h4><a class="track-click" :data-request-id="response.info.meta.request_id" :data-document-id="result.data.id.raw" :data-query="q" :href="result.data.url.raw" x-text="result.data.title.raw"></a></h4>
                 <blockquote style="font-size: 0.7em" x-text="result.data.meta_description.raw"></blockquote>
                 <hr>
             </div>
         </template>
+    </template>
     </template>
 
 <script th:inline="javascript">
@@ -31,6 +33,17 @@ var client = window.ElasticAppSearch.createClient({
   searchKey: [[${@environment.getProperty('appsearch.key')}]],
   endpointBase: [[${@environment.getProperty('appsearch.url')}]],
   engineName: [[${@environment.getProperty('appsearch.engine')}]]
+});
+
+document.addEventListener("click", function(e) {
+  const el = e.target;
+  if (!el.classList.contains("track-click")) return;
+
+  client.click({
+    query: el.getAttribute("data-query"),
+    documentId: el.getAttribute("data-document-id"),
+    requestId: el.getAttribute("data-request-id")
+  });
 });
 </script>
 
