@@ -16,7 +16,7 @@ resource "ec_deployment" "spring-boot-app-search" {
   name                   = "spring-boot-app-search"
 
   region                 = "azure-westeurope"
-  version                = "8.0.0"
+  version                = "8.0.1"
   # do not use any appsearch deployment template ids, those are not for 8.0.0
   deployment_template_id = "azure-memory-optimized"
 
