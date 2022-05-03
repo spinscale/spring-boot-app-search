@@ -1,7 +1,8 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.4'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+  id 'org.springframework.boot' version '2.6.7'
+  id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+  id 'com.github.ben-manes.versions' version '0.42.0'
+  id 'java'
 }
 
 group = 'de.spinscale'
@@ -9,30 +10,30 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 repositories {
-	mavenCentral()
+  mavenCentral()
 }
 
 ext {
-	set('springCloudVersion', "2021.0.1")
+  set('springCloudVersion', "2021.0.1")
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-	implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+  implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+  implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+  implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  developmentOnly 'org.springframework.boot:spring-boot-devtools'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-	}
+  imports {
+    mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+  }
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+  useJUnitPlatform()
 }
